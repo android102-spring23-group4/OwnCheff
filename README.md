@@ -29,39 +29,48 @@ Will give a new recipe everyday to make at home. Uses the TheMealDB/Zestful API,
 
 **Required Features**
 
-- [fill in your required user features here]
-- ...
+- [ ] User is able to create an account
+- [ ] User can log in and log out
+- [ ] User is able to get new recipes everyday
+- [ ] User is able to see a picture of the recipe
+
 
 **Stretch Features**
 
-- [fill in your optional user features here]
-- ...
+- [ ] User is able to swipe to either like or dislike a recipe
+- [ ] User is able to input ingredients to get recipes including inputted ingredients
+- [ ] User is able to rate the recipes 
+- [ ] User is able to choose dietary options such as pescatarian, vegan, keto etc...
 
 ### 2. Screen Archetypes
 
-- [list first screen here]
-  - [list associated required story here]
-  - ...
-- [list second screen here]
-  - [list associated required story here]
-  - ...
+- Login Screen
+  - User should be able to input an username and password.
+  - User should be able to register 
+- Register Screen (Could be fragment)
+    - Register Screen should have an input for username and password for which the user can use to create an account.
+- Recipe screen
+  - Screen where user can see the recipe name and ingredients.
+  - Instructions will be also visible on this screen.
 
 ### 3. Navigation
 
 **Tab Navigation** (Tab to Screen)
 
-- [fill out your first tab]
-- [fill out your second tab]
-- [fill out your third tab]
+* Recipe tab with directions
+* Ingredients tab
+* Profile tab
 
 **Flow Navigation** (Screen to Screen)
 
-- [list first screen here]
-  - [list screen navigation here]
-  - ...
-- [list second screen here]
-  - [list screen navigation here]
-  - ...
+- Login Activity
+  - Default starting activity on app launch
+  - Login Activity -> Register if register is an activity or if its fragment do not need.
+  - Login Activity -> Main Activity
+- Main Activity
+  - Main Activity contains tabs which are fragments
+  - Main activity contains the recipe fragment, ingredient fragment, and profile fragment
+  - Main Activity -> Login Activity on logout
 
 ## Wireframes
 
