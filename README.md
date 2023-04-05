@@ -21,7 +21,7 @@ Will give a new recipe everyday to make at home. Uses the TheMealDB/Zestful API,
 - **Story:** Anybody who loves cooking will relish the challenge of making a new recipe everyday. Never be tired of cooking with cuisines from all over the world. 
 - **Market:** Anybody who wants to cook can be a target audience. 
 - **Habit:** If the reccomended recipes are good enough people will check it daily like they do social media. Then they will develop a habit of checking it everyday. 
-- **Scope:** V1 would merely show a new random recipe everyday. V2 would incorporate a student facing version for students to see their performance. V3 would add a way for students to earn and obtain rewards for goals met. V4 would incorporate a parent facing version.
+- **Scope:** V1 would merely show a new random recipe everyday. V2 would allow for users to comment and show off thier food to the world. V3 would allow for streaks when people try for more and more days in a row. V4 would allow users to follow other users and see what new food everyone is cooking in a feed.
 
 ## Product Spec
 
