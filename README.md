@@ -74,8 +74,12 @@ Will give a new recipe everyday to make at home. Uses the TheMealDB/Zestful API,
 
 ## Wireframes
 
-[Add picture of your hand sketched wireframes in this section]
+![image (3)](https://user-images.githubusercontent.com/37948407/230943125-080f8252-0c82-4077-90e7-484b80cc9342.png)
+
 
 ### [BONUS] Digital Wireframes & Mockups
 
 ### [BONUS] Interactive Prototype
+
+![OwnChefPrototypeDemo](https://user-images.githubusercontent.com/37948407/230943261-a76ba43c-2852-4e91-9e52-606d5df53407.gif)
+
