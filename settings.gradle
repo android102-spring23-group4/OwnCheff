@@ -6,11 +6,14 @@ pluginManagement {
     }
 }
 dependencyResolutionManagement {
-    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
     repositories {
+        // see: https://stackoverflow.com/questions/69163511/build-was-configured-to-prefer-settings-repositories-over-project-repositories-b
+        // required for google signin see docs: https://developers.google.com/identity/sign-in/android/start-integrating
         google()
+        maven { url 'https://maven.google.com' }
         mavenCentral()
     }
+    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
 }
 rootProject.name = "OwnCheff"
 include ':app'

@@ -4,7 +4,20 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity" >
+    tools:context=".MainActivity"/>
+
+    <!-- Main Stuff -->
+    <TextView
+    android:id="@+id/greetingsTV"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    tools:text="greeting"
+    android:textSize="80sp"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintTop_toTopOf="parent"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintVertical_bias="0.15"/>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
     android:id="@+id/bottom_navigation"
@@ -15,12 +28,24 @@
     app:menu="@menu/bottom_navigation_menu" />
 
     <FrameLayout
-        android:id="@+id/frame_layout"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_constraintBottom_toTopOf="@+id/bottom_navigation"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    android:id="@+id/frame_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_constraintBottom_toTopOf="@+id/bottom_navigation"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+
+    <!-- Sign out (temporary, should put somewhere else) -->
+    <Button
+    android:id="@+id/sign_out_and_disconnectButton"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="@+string/button_sign_out_and_disconnect"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@+id/greetingsTV" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
