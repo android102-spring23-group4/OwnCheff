@@ -1,3 +1,5 @@
+
+/* !!!DEPRICATED!!!!
 package com.example.owncheff
 
 import android.app.Activity
@@ -147,3 +149,5 @@ class SignInActivity : AppCompatActivity() {
         //context.startActivity(intent)
     }
 }
+
+*/
