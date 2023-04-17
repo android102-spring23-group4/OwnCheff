@@ -148,6 +148,7 @@ class SignInActivity : AppCompatActivity() {
         mainActivityResultLauncher.launch(intent)
         //context.startActivity(intent)
     }
+<<<<<<< HEAD
 }
 
 */
