@@ -1,16 +1,16 @@
+
+/* !!!DEPRICATED!!!!
 package com.example.owncheff
 
 import android.app.Activity
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import android.widget.Button
-import android.widget.EditText
 import android.widget.TextView
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.app.AppCompatActivity
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
@@ -19,37 +19,38 @@ import com.google.android.gms.common.SignInButton
 import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.tasks.Task
 
+
+//==================================================================================================
+// NOTE:
+// Setting this activity as the one that a launches requires that the exported attrib
+// of the activity tag in the manifest file is set to true.
+// ...
+
+// Q:
+// Should this activity have its own layout file or should it use the main_activity layout?
+// or maybe
+// we go from signin activity -> main activity
+//                                         user does stuff
+//                                         user want to sign out
+//                                         main activity pass some data to signin activity to express that
+//           signin activity <- main activity
+//  signin activity signs user out using google sign in client
+//==================================================================================================
 const val GOOGLE_SIGNOUT_REQ = "shouldSignOutFromGoogle"
 const val USER_ACCOUNT_DATA = "userAccountData"
-class LoginActivity : AppCompatActivity() {
-    // GOOGLE SIGN-IN
+class SignInActivity : AppCompatActivity() {
     private val TAG = "SignInActivity"
     private val RC_SIGN_IN = 9001
     private var mGoogleSignInClient : GoogleSignInClient? = null
     private val mStatusTV : TextView? = null
-    // GOOGLE SIGN-IN
 
     // HANDLER IMPLEMENTATIONS
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_login)
+        setContentView(R.layout.activity_sign_in)
 
-        // DEFAULT SIGN-IN
-        val usernameEt = findViewById<EditText>(R.id.usernameEt)
-        val passwordEt = findViewById<EditText>(R.id.passwordEt)
-        val button = findViewById<Button>(R.id.loginBtn)
-        val signupTv = findViewById<TextView>(R.id.signupTv)
-        button.setOnClickListener {
-            //implement some sort of check for account here once db is implemented.
-            val intent = Intent(this, MainActivity::class.java)
-            startActivity(intent)
-        }
-        signupTv.setOnClickListener {
-            //clicking will go to signup activity
-        }
-
-        // GOOGLE SIGN-IN
         findViewById<TextView>(R.id.sign_inStatusTV)
+
         // Configure sign-in to request the user's ID, email address, and basic
         // profile. ID and basic profile are included in  DEFAULT_SIGN_IN.
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestEmail().build()
@@ -59,7 +60,7 @@ class LoginActivity : AppCompatActivity() {
         // Button Customization
         val signInButton = findViewById<SignInButton>(R.id.sign_inButton)
         signInButton.setSize(SignInButton.SIZE_WIDE)
-        signInButton.setOnClickListener() { googleSignIn() }
+        signInButton.setOnClickListener(){ googleSignIn() }
         signInButton.setColorScheme(SignInButton.COLOR_LIGHT)
     }
     override fun onStart()
@@ -97,6 +98,7 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
+
     // HELPER FUNCTIONS
     private fun googleSignIn() {
         //TODO: find the modern way to do this
@@ -122,8 +124,8 @@ class LoginActivity : AppCompatActivity() {
             //findViewById<View>(R.id.sign_out_and_disconnectButton).visibility = View.VISIBLE
         } else {
             mStatusTV?.setText(R.string.signed_out)
-            //findViewById<View>(R.id.sign_inButton).visibility = View.VISIBLE
-            //findViewById<View>(R.id.sign_out_and_disconnectButton).visibility = View.GONE
+            findViewById<View>(R.id.sign_inButton).visibility = View.VISIBLE
+            findViewById<View>(R.id.sign_out_and_disconnectButton).visibility = View.GONE
         }
     }
     private fun handleSignInResult(completedTask: Task<GoogleSignInAccount>) {
@@ -146,4 +148,7 @@ class LoginActivity : AppCompatActivity() {
         mainActivityResultLauncher.launch(intent)
         //context.startActivity(intent)
     }
+<<<<<<< HEAD
 }
+
+*/
