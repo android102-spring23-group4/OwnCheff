@@ -20,7 +20,7 @@ Will give a new recipe everyday to make at home. Uses the TheMealDB/Zestful API,
 - **Mobile:** Mobile is essential for the convenience of users. Having a small mobile device while cooking will free up space for users when they are cooking. Users will also be able to see the ingredients needed on the fly enabling the user to know which ingredients to purchase on the spot.
 - **Story:** Anybody who loves cooking will relish the challenge of making a new recipe everyday. Never be tired of cooking with cuisines from all over the world. 
 - **Market:** Anybody who wants to cook can be a target audience. 
-- **Habit:** If the reccomended recipes are good enough people will check it daily like they do social media. Then they will develop a habit of checking it everyday. 
+- **Habit:** If the recommended recipes are good enough people will check it daily like they do social media. Then they will develop a habit of checking it everyday. 
 - **Scope:** V1 would merely show a new random recipe everyday. V2 would allow for users to comment and show off thier food to the world. V3 would allow for streaks when people try for more and more days in a row. V4 would allow users to follow other users and see what new food everyone is cooking in a feed.
 
 ## Product Spec
@@ -29,8 +29,8 @@ Will give a new recipe everyday to make at home. Uses the TheMealDB/Zestful API,
 
 **Required Features**
 
-- [ ] User is able to create an account
-- [ ] User can log in and log out
+- [x] User is able to create an account
+- [x] User can log in and log out
 - [ ] User is able to get new recipes everyday
 - [ ] User is able to see a picture of the recipe
 - [ ] User can like a recipe
@@ -84,4 +84,8 @@ Will give a new recipe everyday to make at home. Uses the TheMealDB/Zestful API,
 ### [BONUS] Interactive Prototype
 
 ![OwnChefPrototypeDemo](https://user-images.githubusercontent.com/37948407/230943261-a76ba43c-2852-4e91-9e52-606d5df53407.gif)
+
+### Build Sprint 1 GIF
+
+![Kapture 2023-04-17 at 22 58 59](https://user-images.githubusercontent.com/124464273/232660430-63ba67df-7ee3-4123-a4f2-ab266fac9a06.gif)
 
