@@ -5,12 +5,12 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.lifecycle.lifecycleScope
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
@@ -18,9 +18,12 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.SignInButton
 import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.tasks.Task
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 const val GOOGLE_SIGNOUT_REQ = "shouldSignOutFromGoogle"
-const val USER_ACCOUNT_DATA = "userAccountData"
+const val USER_ACCOUNT_USERNAME = "userAccountUsername"
+const val USER_ACCOUNT_PASSWORD = "userAccountPassword"
 class LoginActivity : AppCompatActivity() {
     // GOOGLE SIGN-IN
     private val TAG = "SignInActivity"
@@ -28,6 +31,8 @@ class LoginActivity : AppCompatActivity() {
     private var mGoogleSignInClient : GoogleSignInClient? = null
     private val mStatusTV : TextView? = null
     // GOOGLE SIGN-IN
+    private lateinit var mainActivityResultLauncher: ActivityResultLauncher<Intent>
+    private lateinit var registrationActivityResultLauncher: ActivityResultLauncher<Intent>
 
     // HANDLER IMPLEMENTATIONS
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -40,12 +45,19 @@ class LoginActivity : AppCompatActivity() {
         val button = findViewById<Button>(R.id.loginBtn)
         val signupTv = findViewById<TextView>(R.id.signupTv)
         button.setOnClickListener {
-            //implement some sort of check for account here once db is implemented.
+            //TODO: implement some sort of check for account here once db is implemented.
+            //TODO: look up user by user name then check id
+
+            // if user found and credentials correct
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
+            // else hint user to signup
         }
         signupTv.setOnClickListener {
-            //clicking will go to signup activity
+            val userName : String  = usernameEt.text.toString()
+            val password : String  = passwordEt.text.toString()
+
+            goToRegistrationActivity(userName, password)
         }
 
         // GOOGLE SIGN-IN
@@ -61,6 +73,30 @@ class LoginActivity : AppCompatActivity() {
         signInButton.setSize(SignInButton.SIZE_WIDE)
         signInButton.setOnClickListener() { googleSignIn() }
         signInButton.setColorScheme(SignInButton.COLOR_LIGHT)
+
+
+        // LOGIC WHEN RETURNING TO THIS ACTIVITY
+        mainActivityResultLauncher = registerForActivityResult(
+            ActivityResultContracts.StartActivityForResult()
+        ) { result ->
+            // If the user comes back to this activity from MainActivity
+            // with no error or cancellation
+            if (result.resultCode == Activity.RESULT_OK) {
+                val data = result.data
+                // Get the data passed from EditActivity
+                if (data != null) {
+                    val shouldSignOut = data.extras!!.getBoolean(GOOGLE_SIGNOUT_REQ)
+                    if(shouldSignOut) {  googleSignOut() }
+                }
+            }
+        }
+        registrationActivityResultLauncher = registerForActivityResult(
+            ActivityResultContracts.StartActivityForResult()
+        ) { result ->
+            if (result.resultCode == Activity.RESULT_OK) {
+                goToMainActivity("User returned from registration") //TODO: actually pass username
+            }
+        }
     }
     override fun onStart()
     {
@@ -82,20 +118,7 @@ class LoginActivity : AppCompatActivity() {
             handleSignInResult(task)
         }
     }
-    var mainActivityResultLauncher: ActivityResultLauncher<Intent> = registerForActivityResult(
-        ActivityResultContracts.StartActivityForResult()
-    ) { result ->
-        // If the user comes back to this activity from MainActivity
-        // with no error or cancellation
-        if (result.resultCode == Activity.RESULT_OK) {
-            val data = result.data
-            // Get the data passed from EditActivity
-            if (data != null) {
-                val shouldSignOut = data.extras!!.getBoolean(GOOGLE_SIGNOUT_REQ)
-                if(shouldSignOut) {  googleSignOut() }
-            }
-        }
-    }
+
 
     // HELPER FUNCTIONS
     private fun googleSignIn() {
@@ -142,8 +165,15 @@ class LoginActivity : AppCompatActivity() {
     {
         val context = this
         val intent = Intent(context, MainActivity::class.java)
-        intent.putExtra(USER_ACCOUNT_DATA, userDisplayName)
+        intent.putExtra(USER_ACCOUNT_USERNAME, userDisplayName)
         mainActivityResultLauncher.launch(intent)
-        //context.startActivity(intent)
+    }
+    private fun goToRegistrationActivity(username : String, password : String)
+    {
+        val context = this
+        val intent = Intent(context, RegistrationActivity::class.java)
+        intent.putExtra(USER_ACCOUNT_USERNAME, username)
+        intent.putExtra(USER_ACCOUNT_PASSWORD, password)
+        registrationActivityResultLauncher.launch(intent)
     }
 }
