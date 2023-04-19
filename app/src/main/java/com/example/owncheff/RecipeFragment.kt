@@ -31,7 +31,7 @@ class RecipeFragment : Fragment(), OnListFragmentInteractionListener {
         val progressBar = view.findViewById<View>(R.id.progress) as ContentLoadingProgressBar
         val recyclerView = view.findViewById<View>(R.id.list) as RecyclerView
         val context = view.context
-        recyclerView.layoutManager = GridLayoutManager(context, 2)
+        recyclerView.layoutManager = GridLayoutManager(context, 1)
         updateAdapter(progressBar, recyclerView)
         return view
     }
@@ -53,17 +53,13 @@ class RecipeFragment : Fragment(), OnListFragmentInteractionListener {
             override fun onSuccess(statusCode: Int, headers: Headers, json: JSON) {
                 Log.i(ControlsProviderService.TAG, "Successfully fetched articles: $json")
                 val results = json!!.jsonObject["meals"] as JSONArray
-                val json = results.toJSONObject(results)
                 val gson = Gson()
-                val arrayTutorialType = object : TypeToken<List<Meal>>() {}.type
-                val models : List<Meal> = gson.fromJson(results.toString(), arrayTutorialType)
+                val Recipe = object : TypeToken<List<Meal>>() {}.type
+                val models : List<Meal> = gson.fromJson(results.toString(), Recipe)
                 recyclerView.adapter = MealRVAdapter(models, this@RecipeFragment)
-                Log.e("hello", results.toString())
             }
         })
-        Log.e("eor", "System should be completed")
         progressBar.hide()
-
     }
 
     override fun onItemClick(item: Meal) {
