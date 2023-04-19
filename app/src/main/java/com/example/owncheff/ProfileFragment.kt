@@ -10,6 +10,7 @@ import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
 import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -48,18 +49,22 @@ class ProfileFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        val acct = GoogleSignIn.getLastSignedInAccount(requireActivity())
-
-
-            val personName: String? = acct?.displayName
-            val personGivenName: String? = acct?.givenName
-            val personFamilyName: String? = acct?.familyName
-            val personEmail: String? = acct?.email
-            val personId: String? = acct?.id
-            val personPhoto: Uri? = acct?.photoUrl
-
-
         val root = inflater.inflate(R.layout.fragment_profile, container, false)
+/*
+        val acct = GoogleSignIn.getLastSignedInAccount(requireActivity())
+*/
+        val acct = arguments?.getParcelable<GoogleSignInAccount>("google_account")
+
+
+        val personName: String? = acct?.displayName
+        val personGivenName: String? = acct?.givenName
+        val personFamilyName: String? = acct?.familyName
+        val personEmail: String? = acct?.email
+        val personId: String? = acct?.id
+        val personPhoto: Uri? = acct?.photoUrl
+
+        /*val signInClient = GoogleSignIn.getClient(this,gso)*/
+
         var firstNameTv = root.findViewById<TextView>(R.id.firstnameTv)
         val lastNameTv = root.findViewById<TextView>(R.id.lastnameTv)
         val emailTv = root.findViewById<TextView>(R.id.emailTv)

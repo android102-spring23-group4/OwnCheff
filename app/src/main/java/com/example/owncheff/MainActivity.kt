@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import android.widget.Button
 import android.widget.TextView
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 
 
 class MainActivity : AppCompatActivity() {
@@ -18,6 +19,10 @@ class MainActivity : AppCompatActivity() {
         val recipeFragment: Fragment = RecipeFragment()
         val ingredientsFragment: Fragment = IngredientsFragment()
         val profileFragment: Fragment = ProfileFragment()
+
+        val acct = intent.getParcelableExtra<GoogleSignInAccount>("google_account")
+        val bundle = Bundle()
+        bundle.putParcelable("google_account",acct)
 
         val bottomNavigationView: BottomNavigationView = findViewById(R.id.bottom_navigation)
 

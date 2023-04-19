@@ -49,8 +49,9 @@ class LoginActivity : AppCompatActivity() {
             //TODO: look up user by user name then check id
 
             // if user found and credentials correct
-
+            val acct = GoogleSignIn.getLastSignedInAccount(this)
             val intent = Intent(this, MainActivity::class.java)
+            intent.putExtra("google_account",acct)
             startActivity(intent)
             // else hint user to signup
         }
