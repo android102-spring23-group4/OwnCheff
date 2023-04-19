@@ -49,6 +49,7 @@ class LoginActivity : AppCompatActivity() {
             //TODO: look up user by user name then check id
 
             // if user found and credentials correct
+
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
             // else hint user to signup
