@@ -1,3 +1,14 @@
 <resources>
     <string name="app_name">OwnCheff</string>
+    <!-- App Component strings -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_sign_in">SignInActivity</string>
+
+    <!--App strings-->
+    <string name="signed_out">Signed out</string>
+    <string name="user_greeting">Welcome to your account %s</string>
+    <string name="button_sign_out_and_disconnect">Sign-out and Disconnect</string>
+    <!--Google sign in-->
+    <string name="signed_in_fmt">Signed in as: %s</string>
+    <string name="server_client_id">765240101129-fff82q7mfdlddl9vijust2o4teud78hm.apps.googleusercontent.com</string>
 </resources>
