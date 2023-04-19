@@ -35,11 +35,11 @@ class MainActivity : AppCompatActivity() {
 
 
         // SIGN-OUT STUFF
-        val signOutButton = findViewById<Button>(R.id.sign_out_and_disconnectButton)
+        //val signOutButton = findViewById<Button>(R.id.sign_out_and_disconnectButton)
         val userName :String? = getIntent().getStringExtra(USER_ACCOUNT_USERNAME)
-        val greetingsTV = findViewById<TextView>(R.id.greetingsTV)
-        greetingsTV.text = getString(R.string.user_greeting, userName)
-        signOutButton.setOnClickListener() { signOut() }
+        //val greetingsTV = findViewById<TextView>(R.id.greetingsTV)
+        //greetingsTV.text = getString(R.string.user_greeting, userName)
+        //signOutButton.setOnClickListener() { signOut() }
     }
 
     // HELPERS

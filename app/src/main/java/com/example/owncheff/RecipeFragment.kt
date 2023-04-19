@@ -1,59 +1,72 @@
 package com.example.owncheff
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
+import android.service.controls.ControlsProviderService
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.core.widget.ContentLoadingProgressBar
+import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.codepath.asynchttpclient.AsyncHttpClient
+import com.codepath.asynchttpclient.RequestParams
+import com.codepath.asynchttpclient.callback.JsonHttpResponseHandler
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
+import okhttp3.Headers
+import org.json.JSONArray
+import org.json.JSONObject
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
+class RecipeFragment : Fragment(), OnListFragmentInteractionListener {
 
-/**
- * A simple [Fragment] subclass.
- * Use the [RecipeFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
-class RecipeFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_recipe, container, false)
+        val view = inflater.inflate(R.layout.fragment_recipe_list, container, false)
+        val progressBar = view.findViewById<View>(R.id.progress) as ContentLoadingProgressBar
+        val recyclerView = view.findViewById<View>(R.id.list) as RecyclerView
+        val context = view.context
+        recyclerView.layoutManager = GridLayoutManager(context, 2)
+        updateAdapter(progressBar, recyclerView)
+        return view
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment RecipeFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            RecipeFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
+
+    private fun updateAdapter(progressBar: ContentLoadingProgressBar, recyclerView: RecyclerView) {
+        progressBar.show()
+        val ARTICLE_SEARCH_URL = "https://www.themealdb.com/api/json/v1/1/random.php"
+        val client = AsyncHttpClient()
+        client.get(ARTICLE_SEARCH_URL, object : JsonHttpResponseHandler() {
+            override fun onFailure(
+                statusCode: Int,
+                headers: Headers?,
+                response: String?,
+                throwable: Throwable?
+            ) {
+                Log.e(ControlsProviderService.TAG, "Failed to fetch articles: $statusCode")
             }
+            override fun onSuccess(statusCode: Int, headers: Headers, json: JSON) {
+                Log.i(ControlsProviderService.TAG, "Successfully fetched articles: $json")
+                val results = json!!.jsonObject["meals"] as JSONArray
+                val json = results.toJSONObject(results)
+                val gson = Gson()
+                val arrayTutorialType = object : TypeToken<List<Meal>>() {}.type
+                val models : List<Meal> = gson.fromJson(results.toString(), arrayTutorialType)
+                recyclerView.adapter = MealRVAdapter(models, this@RecipeFragment)
+                Log.e("hello", results.toString())
+            }
+        })
+        Log.e("eor", "System should be completed")
+        progressBar.hide()
+
+    }
+
+    override fun onItemClick(item: Meal) {
+        TODO("Not yet implemented")
     }
 }
