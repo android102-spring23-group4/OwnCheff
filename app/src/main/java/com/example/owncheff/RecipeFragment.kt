@@ -23,6 +23,7 @@ import org.json.JSONObject
 class RecipeFragment : Fragment(), OnListFragmentInteractionListener {
 
 
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -63,6 +64,6 @@ class RecipeFragment : Fragment(), OnListFragmentInteractionListener {
     }
 
     override fun onItemClick(item: Meal) {
-        TODO("Not yet implemented")
+        Toast.makeText(context, "test: " , Toast.LENGTH_LONG).show()
     }
 }
