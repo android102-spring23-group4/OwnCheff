@@ -11,6 +11,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 
 
 class MainActivity : AppCompatActivity() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -20,9 +21,22 @@ class MainActivity : AppCompatActivity() {
         val ingredientsFragment: Fragment = IngredientsFragment()
         val profileFragment: Fragment = ProfileFragment()
 
-        val acct = intent.getParcelableExtra<GoogleSignInAccount>("google_account")
+
+        /*val acct = intent.getParcelableExtra<GoogleSignInAccount>("google_account")*/
+        val email = intent.getStringExtra("email")
+        val firstname = intent.getStringExtra("firstname")
+        val lastname = intent.getStringExtra("lastname")
+        val displayname = intent.getStringExtra("displayname")
+        val profilepicture = intent.getStringExtra("pfp")
+
         val bundle = Bundle()
-        bundle.putParcelable("google_account",acct)
+        bundle.putString("email", email)
+        bundle.putString("name", displayname)
+        bundle.putString("firstname",firstname)
+        bundle.putString("lastname",lastname)
+        bundle.putString("profilepic",profilepicture)
+        profileFragment.arguments = bundle
+
 
         val bottomNavigationView: BottomNavigationView = findViewById(R.id.bottom_navigation)
 
@@ -40,11 +54,9 @@ class MainActivity : AppCompatActivity() {
 
 
         // SIGN-OUT STUFF
-        val signOutButton = findViewById<Button>(R.id.sign_out_and_disconnectButton)
-        val userName :String? = getIntent().getStringExtra(USER_ACCOUNT_USERNAME)
+        val userName :String? = displayname
         val greetingsTV = findViewById<TextView>(R.id.greetingsTV)
         greetingsTV.text = getString(R.string.user_greeting, userName)
-        signOutButton.setOnClickListener() { signOut() }
     }
 
     // HELPERS

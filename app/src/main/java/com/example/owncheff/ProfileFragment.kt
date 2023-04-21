@@ -1,16 +1,24 @@
 package com.example.owncheff
 
+import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
+import com.google.android.gms.auth.api.signin.GoogleSignInClient
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions
+import com.google.android.gms.fido.fido2.api.common.RequestOptions
+
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -55,28 +63,48 @@ class ProfileFragment : Fragment() {
 */
         val acct = arguments?.getParcelable<GoogleSignInAccount>("google_account")
 
+        val personEmail = arguments?.getString("email")
+        val personGivenName = arguments?.getString("firstname")
+        val personName = arguments?.getString("name")
+        val personFamilyName = arguments?.getString("lastname")
+        val profilepictureurl = arguments?.getString("profilepic")
 
-        val personName: String? = acct?.displayName
+/*        val personName: String? = acct?.displayName
         val personGivenName: String? = acct?.givenName
         val personFamilyName: String? = acct?.familyName
         val personEmail: String? = acct?.email
-        val personId: String? = acct?.id
-        val personPhoto: Uri? = acct?.photoUrl
+        val personPhoto: Uri? = acct?.photoUrl*/
 
         /*val signInClient = GoogleSignIn.getClient(this,gso)*/
 
-        var firstNameTv = root.findViewById<TextView>(R.id.firstnameTv)
         val lastNameTv = root.findViewById<TextView>(R.id.lastnameTv)
         val emailTv = root.findViewById<TextView>(R.id.emailTv)
         val displayNameTv = root.findViewById<TextView>(R.id.displaynameTv)
         val profilepictureIv = root.findViewById<ImageView>(R.id.pfpIv)
-        val userIdTv = root.findViewById<TextView>(R.id.userIdTv)
+        val signoutBtn = root.findViewById<Button>(R.id.signoutBtn)
 
-        firstNameTv.text = personGivenName
-        lastNameTv.text = personFamilyName
+        lastNameTv.text = personGivenName+" "+personFamilyName
         displayNameTv.text = personName
         emailTv.text = personEmail
-        userIdTv.text = personId
+
+
+        Glide.with(this)
+            .load(profilepictureurl.toString())
+            .transition(DrawableTransitionOptions.withCrossFade())
+            .override(400, 400)
+            .circleCrop()
+            .into(profilepictureIv)
+
+        signoutBtn.setOnClickListener {
+            // Sign out the user from Google
+            val googleSignInClient: GoogleSignInClient = GoogleSignIn.getClient(requireContext(), GoogleSignInOptions.DEFAULT_SIGN_IN)
+            googleSignInClient.signOut().addOnCompleteListener {
+                // Launch LoginActivity after sign-out
+                val intent = Intent(activity, GoogleLoginActivity::class.java)
+                startActivity(intent)
+                activity?.finish()
+            }
+        }
 
 
         return root
