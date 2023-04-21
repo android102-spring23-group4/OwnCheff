@@ -1,29 +1,28 @@
-package com.example.owncheff
-
+package com.example.owncheff.Meal
 
 import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import com.example.owncheff.Meal.MealEntity
+import com.example.owncheff.MealDao
 
-@Database(entities = [UserEntity::class], version = 1)
-abstract class AppDB : RoomDatabase()
-{
-    abstract fun userDao(): UserDao
-    companion object
-    {
+@Database(entities = [MealEntity::class], version = 1)
+    abstract class mealDB : RoomDatabase() {
+    abstract fun mealDao(): MealDao
+
+    companion object {
         @Volatile
-        private var INSTANCE: AppDB? = null
-        fun getInstance(context: Context): AppDB =
+        private var INSTANCE: mealDB? = null
+        fun getInstance(context: Context): mealDB =
             INSTANCE ?: synchronized(this)
             {
                 INSTANCE ?: buildDatabase(context).also { INSTANCE = it }
             }
+
         private fun buildDatabase(context: Context) =
             Room.databaseBuilder(
                 context.applicationContext,
-                AppDB::class.java, "Articles-db"
+                mealDB::class.java, "Meal-db"
             ).build()
     }
 }

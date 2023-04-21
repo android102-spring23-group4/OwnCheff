@@ -1,4 +1,4 @@
-package com.example.owncheff
+package com.example.owncheff.Meal
 
 import com.google.gson.annotations.SerializedName
 //This is the meal item and what it is taking from the JSON string

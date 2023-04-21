@@ -1,4 +1,4 @@
-package com.example.owncheff
+package com.example.owncheff.Meal
 
 import android.view.LayoutInflater
 import android.view.View
@@ -7,9 +7,10 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.example.owncheff.R
 
 class MealRVAdapter(private val meals: List<Meal>,
-                      private val mListener: OnListFragmentInteractionListener?
+                    private val mListener: OnListFragmentInteractionListener?
 )
     : RecyclerView.Adapter<MealRVAdapter.BookViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BookViewHolder {
@@ -29,17 +30,14 @@ class MealRVAdapter(private val meals: List<Meal>,
         val mInstruction: TextView = mView.findViewById<View>(R.id.Instructions) as TextView
         val mImage: ImageView = mView.findViewById<View>(R.id.imageView) as ImageView
 
-
         override fun toString(): String {
             return mName.toString() + " '" + mInstruction.text + "'"
         }
     }
 
-
     override fun onBindViewHolder(holder: BookViewHolder, position: Int) {
         //Binding the view and images
         val recipe = meals[position]
-
         holder.mItem = recipe
         holder.mName.text = recipe.name
         holder.mInstruction.text = recipe.description

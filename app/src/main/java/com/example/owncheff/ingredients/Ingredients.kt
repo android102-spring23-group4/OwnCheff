@@ -1,4 +1,4 @@
-package com.example.owncheff
+package com.example.owncheff.ingredients
 
 import com.google.gson.annotations.SerializedName
 

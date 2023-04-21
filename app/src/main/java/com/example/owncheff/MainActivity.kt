@@ -4,9 +4,9 @@ import androidx.appcompat.app.AppCompatActivity
 import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
+import com.example.owncheff.Meal.RecipeFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import android.widget.Button
-import android.widget.TextView
+import com.example.owncheff.ingredients.IngredientsFragment
 
 
 class MainActivity : AppCompatActivity() {
