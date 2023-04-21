@@ -19,6 +19,20 @@ class MainActivity : AppCompatActivity() {
         val ingredientsFragment: Fragment = IngredientsFragment()
         val profileFragment: Fragment = ProfileFragment()
 
+        val email = intent.getStringExtra("email")
+        val firstname = intent.getStringExtra("firstname")
+        val lastname = intent.getStringExtra("lastname")
+        val displayname = intent.getStringExtra("displayname")
+        val profilepicture = intent.getStringExtra("pfp")
+
+        val bundle = Bundle()
+        bundle.putString("email", email)
+        bundle.putString("name", displayname)
+        bundle.putString("firstname",firstname)
+        bundle.putString("lastname",lastname)
+        bundle.putString("profilepic",profilepicture)
+        profileFragment.arguments = bundle
+
         val bottomNavigationView: BottomNavigationView = findViewById(R.id.bottom_navigation)
 
         bottomNavigationView.setOnItemSelectedListener { item ->
