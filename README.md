@@ -33,6 +33,8 @@ Will give a new recipe everyday to make at home. Uses the TheMealDB/Zestful API,
 - [x] User can log in and log out
 - [ ] User is able to get new recipes everyday
 - [x] User is able to see a picture of the recipe
+- [x] User is able to sign in with google services
+- [x] User is able to see their profile screen with user details
 
 **Stretch Features**
 
