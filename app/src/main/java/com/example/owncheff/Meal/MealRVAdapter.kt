@@ -39,8 +39,8 @@ class MealRVAdapter(private val meals: List<Meal>,
         //Binding the view and images
         val recipe = meals[position]
         holder.mItem = recipe
-        holder.mName.text = recipe.name
-        holder.mInstruction.text = recipe.description
+        holder.mName.text = recipe.mealName
+        holder.mInstruction.text = recipe.mealInstructions
 
         holder.mView.setOnClickListener {
             holder.mItem?.let { book ->
@@ -49,7 +49,7 @@ class MealRVAdapter(private val meals: List<Meal>,
         }
 
         Glide.with(holder.mView)
-            .load(recipe.image)
+            .load(recipe.mealImage)
             .centerInside()
             .into(holder.mImage)
 

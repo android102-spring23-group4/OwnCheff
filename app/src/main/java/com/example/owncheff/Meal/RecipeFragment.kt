@@ -1,6 +1,5 @@
 package com.example.owncheff.Meal
 
-import android.app.Application
 import android.os.Bundle
 import android.service.controls.ControlsProviderService
 import android.util.Log
@@ -10,41 +9,26 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.widget.ContentLoadingProgressBar
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.codepath.asynchttpclient.AsyncHttpClient
 import com.codepath.asynchttpclient.callback.JsonHttpResponseHandler
-import com.example.owncheff.OwnCheffApp
 import com.example.owncheff.R
-import com.example.owncheff.UserEntity
-import com.google.gson.Gson
-import com.google.gson.reflect.TypeToken
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 import okhttp3.Headers
 import org.json.JSONArray
-import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
-import android.widget.Button
-import android.widget.EditText
-import android.widget.TextView
-import androidx.lifecycle.lifecycleScope
-import com.example.owncheff.Meal.MealApplication
-import kotlinx.coroutines.launch
+import org.json.JSONException
 
 class RecipeFragment : Fragment(), OnListFragmentInteractionListener {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
 
 
-
-
+    }
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
 
     ): View? {
-
-
         val view = inflater.inflate(R.layout.fragment_recipe_list, container, false)
         val progressBar = view.findViewById<View>(R.id.progress) as ContentLoadingProgressBar
         val recyclerView = view.findViewById<View>(R.id.list) as RecyclerView
@@ -69,14 +53,39 @@ class RecipeFragment : Fragment(), OnListFragmentInteractionListener {
                 Log.e(ControlsProviderService.TAG, "Failed to fetch articles: $statusCode")
             }
             override fun onSuccess(statusCode: Int, headers: Headers, json: JSON) {
+                try {
+                    val mealArray = JSONArray(json.jsonObject.get("meals").toString())
+                    val meal = mealArray.getJSONObject(0)
+                    val mealName = meal.getString("strMeal")
+                    val mealCategory = meal.getString("strCategory")
+                    val mealInstructions = meal.getString("strInstructions")
+                    val mealImage = meal.getString("strMealThumb")
+                    val mealIngredients = ArrayList<String>()
 
-                Log.i(ControlsProviderService.TAG, "Successfully fetched articles: $json")
-                val results = json!!.jsonObject["meals"] as JSONArray
-                val gson = Gson()
-                val Recipe = object : TypeToken<List<Meal>>() {}.type
-                val models : List<Meal> = gson.fromJson(results.toString(), Recipe)
+                    // Parse the ingredients
+                    for (i in 1..20) {
+                        val ingredient = meal.getString("strIngredient$i")
+                        if (!ingredient.isNullOrEmpty()) {
+                            val measure = meal.getString("strMeasure$i")
+                            mealIngredients.add("$ingredient - $measure")
+                        }
+                    }
 
-                recyclerView.adapter = MealRVAdapter(models, this@RecipeFragment)
+                    // Create a new Meal object
+                    val newMeal = Meal(
+                        mealName,
+                        mealInstructions,
+                        mealImage,
+                    )
+
+                    // Update the adapter
+                    val models = listOf(newMeal)
+                    recyclerView.adapter = MealRVAdapter(models, this@RecipeFragment)
+                } catch (e: JSONException) {
+                    Log.e(ControlsProviderService.TAG, "Failed to parse response: $e")
+                } finally {
+                    progressBar.hide()
+                }
             }
         })
         progressBar.hide()
