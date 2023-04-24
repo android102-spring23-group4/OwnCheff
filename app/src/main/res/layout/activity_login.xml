@@ -5,6 +5,7 @@
     android:id="@+id/loginCL"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/login_background"
     tools:context=".LoginActivity">
 
     <!-- DEFAULT LOG-IN-->
@@ -12,63 +13,43 @@
         android:id="@+id/owncheffTv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:fontFamily="@font/archivo_black"
         android:text="OwnCheff"
-        android:textSize="48sp"
+        android:textColor="@color/white"
+        android:textSize="68sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.107" />
 
-    <TextView
-        android:id="@+id/usernameTv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="116dp"
-        android:text="Username:"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.118"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/owncheffTv" />
-
     <EditText
         android:id="@+id/usernameEt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
+        android:layout_marginBottom="41dp"
+        android:background="@color/white"
         android:ems="10"
         android:hint="Username"
+        app:layout_constraintBottom_toTopOf="@+id/passwordEt"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.184"
+        app:layout_constraintHorizontal_bias="0.502"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/usernameTv" />
-
-    <TextView
-        android:id="@+id/passwordTv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="Password:"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.112"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/usernameEt" />
+        app:layout_constraintTop_toBottomOf="@+id/owncheffTv"
+        app:layout_constraintVertical_bias="1.0" />
 
     <EditText
         android:id="@+id/passwordEt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="24dp"
+        android:background="@color/white"
         android:ems="10"
         android:hint="Password"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.184"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/passwordTv" />
+        app:layout_constraintTop_toBottomOf="@+id/sign_inStatusTV" />
 
     <Button
         android:id="@+id/loginBtn"
@@ -78,35 +59,41 @@
         android:text="LOGIN"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.11"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/passwordEt"
         app:layout_constraintVertical_bias="0.022" />
+
+    <!-- GOOGLE LOG-IN-->
 
     <TextView
         android:id="@+id/signupTv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="176dp"
         android:text="Signup"
+        android:textColor="@color/white"
         android:textSize="16sp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.182"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/loginBtn"
-        app:layout_constraintTop_toBottomOf="@+id/passwordEt"
-        app:layout_constraintVertical_bias="0.155" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/loginBtn" />
 
-    <!-- GOOGLE LOG-IN-->
     <TextView
         android:id="@+id/sign_inStatusTV"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        tools:text="status"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.486"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.435"
+        tools:text="status" />
+
     <com.google.android.gms.common.SignInButton
         android:id="@+id/sign_inButton"
         android:layout_width="wrap_content"
@@ -118,6 +105,7 @@
         app:layout_constraintTop_toBottomOf="@+id/sign_inStatusTV"
         app:layout_constraintBottom_toBottomOf="parent"
         tools:visibility="gone" />
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
