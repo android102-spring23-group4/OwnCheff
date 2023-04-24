@@ -7,6 +7,7 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import androidx.lifecycle.lifecycleScope
+import com.example.owncheff.Meal.MealApplication
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 

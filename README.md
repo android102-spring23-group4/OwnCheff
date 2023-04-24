@@ -32,10 +32,9 @@ Will give a new recipe everyday to make at home. Uses the TheMealDB/Zestful API,
 - [x] User is able to create an account
 - [x] User can log in and log out
 - [ ] User is able to get new recipes everyday
-- [ ] User is able to see a picture of the recipe
-- [ ] User can like a recipe
-- [ ] User can see a list of liked recipes
-- [ ] User can see a list of cooked recipes
+- [x] User is able to see a picture of the recipe
+- [x] User is able to sign in with google services
+- [x] User is able to see their profile screen with user details
 
 **Stretch Features**
 
@@ -43,6 +42,9 @@ Will give a new recipe everyday to make at home. Uses the TheMealDB/Zestful API,
 - [ ] User is able to input ingredients to get recipes including inputted ingredients
 - [ ] User is able to rate the recipes 
 - [ ] User is able to choose dietary options such as pescatarian, vegan, keto etc...
+- [ ] User can see a list of liked recipes
+- [ ] User can see a list of cooked recipes
+- [ ] User can like a recipe
 
 ### 2. Screen Archetypes
 
