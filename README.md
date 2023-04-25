@@ -87,7 +87,6 @@ Will give a new recipe everyday to make at home. Uses the TheMealDB/Zestful API,
 
 ![OwnChefPrototypeDemo](https://user-images.githubusercontent.com/37948407/230943261-a76ba43c-2852-4e91-9e52-606d5df53407.gif)
 
-### Build Sprint 1 GIF
+### Build Sprint 2 GIF
 
-![Kapture 2023-04-17 at 22 58 59](https://user-images.githubusercontent.com/124464273/232660430-63ba67df-7ee3-4123-a4f2-ab266fac9a06.gif)
-
+![Kapture 2023-04-24 at 21 28 16](https://user-images.githubusercontent.com/124464273/234152547-2e283616-8042-4eb2-a13a-eb601ba1d6d9.gif)
